@@ -1,0 +1,19 @@
+* import express from "express"
+    au lieu de
+* const express = require("express")
+
+https://babeljs.io/ => compiler
+babeljs translate code from ES6 toward ES5
+
+npm install sequelize
+npm install -g sequelize-cli
+
+arrow function
+
+passage par référence var
+passage par copie let
+
+(=>) opérateur diamond
+
+strapy
+
