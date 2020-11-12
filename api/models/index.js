@@ -45,9 +45,9 @@ fs
             (file !== basename) && (file.slice(-3) === '.js'))
     })
     .forEach((file) => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize)
-    db[model.name] = model
-});
+        const model = require(path.join(__dirname, file))(sequelize, Sequelize)
+        db[model.name] = model
+    });
 
 Object.keys(db).forEach((modelName) => {
     if (db[modelName].associate) {
@@ -57,5 +57,24 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
+
+db.books = require("./book")(sequelize, Sequelize)
+db.authors = require("./author")(sequelize, Sequelize)
+
+db.authors.hasMany(db.books, {
+    foreignKey: {
+        name: "author_id",
+        allowNull: false
+    },
+    as: "book"
+})
+
+db.books.belongsTo(db.authors, {
+    foreignKey: {
+        name: "author_id",
+        allowNull: false
+    },
+    as: "author"
+})
 
 export default db

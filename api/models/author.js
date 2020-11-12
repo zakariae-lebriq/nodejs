@@ -3,8 +3,6 @@ const {
     Model
 } = require('sequelize');
 
-const Book = require("./book")
-
 module.exports = (sequelize, DataTypes) => {
     class Author extends Model {
         /**
@@ -24,12 +22,6 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'Author',
     });
 
-    Author.hasMany(Book, {
-        foreignKey:
-            {
-                name: "author_id",
-                as: "author"
-            }
-    })
+
     return Author;
 };

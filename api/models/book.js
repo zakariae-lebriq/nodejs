@@ -3,8 +3,6 @@ const {
     Model
 } = require('sequelize');
 
-const Author = require("./author")
-
 module.exports = (sequelize, DataTypes) => {
     class Book extends Model {
         /**
@@ -24,9 +22,6 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'Book',
     });
 
-    Book.belongsTo(Author, {
-        foreignKey: "author_id"
-    })
 
     return Book;
 };
