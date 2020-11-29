@@ -1,3 +1,4 @@
 node_modules
 .idea
 pgData
+.nyc_output
