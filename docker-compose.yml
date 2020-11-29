@@ -12,14 +12,16 @@ services:
       POSTGRES_DB: database_development
 
   app:
-    working_dir: /node
-    entrypoint: ["sh","entrypoint.sh"]
-    image: node:12
+    image: kazzyops/book:1.0.2
     ports:
       - "3000:3000"
-    volumes:
-      - .:/node
     environment:
+      NODE_ENV: production
       DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: database_development
+      DB_USERNAME: postgres
+      DB_PASS: root
+      DIALECT: postgres
     depends_on:
       - db

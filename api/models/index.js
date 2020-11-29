@@ -5,28 +5,20 @@ import configJson from "../config/config.js"
 
 const basename = path.basename(__filename)
 const env = process.env.NODE_ENV ? process.env.NODE_ENV : "development"
-
 const config = configJson[env]
-
-console.log('this is the environment: ', env)
-
 const db = {}
 
 let sequelize
-if (config.environment === "production") {
-    sequelize = new Sequelize(
-        process.env["production"], config
-    );
 
+if (env == "production") {
     sequelize = new Sequelize(
         process.env.DB_NAME,
         process.env.DB_USERNAME,
         process.env.DB_PASS, {
             host: process.env.DB_HOST,
             port: process.env.DB_PORT,
-            dialect: "postgres",
+            dialect: process.env.DIALECT,
             dialectOptions: {
-                ssl: true,
                 native: true
             },
             logging: true

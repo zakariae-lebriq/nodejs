@@ -1,0 +1,31 @@
+version: '3'
+services:
+  db:
+    image: 'postgres:11.2'
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgData:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: database_development
+
+  app:
+    working_dir: /node
+    entrypoint: ["sh","entrypoint.sh"]
+    image: node:12
+    ports:
+      - "5000:3000"
+    volumes:
+      - .:/node
+    environment:
+      NODE_ENV: production
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: database_development
+      DB_USERNAME: postgres
+      DB_PASS: root
+      DIALECT: postgres
+    depends_on:
+      - db
